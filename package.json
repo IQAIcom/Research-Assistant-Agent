@@ -1,0 +1,43 @@
+{
+	"name": "adk-simple-agent",
+	"version": "0.8.0",
+	"description": "A starter project for building AI agents in TypeScript with ADK-TS",
+	"main": "dist/index.js",
+	"private": true,
+	"scripts": {
+		"build": "tsc",
+		"dev": "tsx watch src/index.ts",
+		"start": "node dist/index.js",
+		"clean": "rimraf dist",
+		"prebuild": "pnpm clean"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/IQAICOM/adk-agent-starter.git"
+	},
+	"keywords": [
+		"ai",
+		"agent",
+		"mcp",
+		"adk-ts",
+		"IQ AI"
+	],
+	"author": "IQ AI",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/IQAICOM/adk-agent-starter/issues"
+	},
+	"homepage": "https://github.com/IQAICOM/adk-agent-starter#readme",
+	"dependencies": {
+		"@iqai/adk": "0.8.1",
+		"dotenv": "^17.2.2",
+		"zod": "^4.1.5"
+	},
+	"devDependencies": {
+		"@types/node": "^24.3.1",
+		"rimraf": "^6.0.1",
+		"tsx": "^4.20.5",
+		"typescript": "^5.9.2"
+	},
+	"packageManager": "pnpm@10.29.3+sha512.498e1fb4cca5aa06c1dcf2611e6fafc50972ffe7189998c409e90de74566444298ffe43e6cd2acdc775ba1aa7cc5e092a8b7054c811ba8c5770f84693d33d2dc"
+}
