@@ -46,12 +46,15 @@ The Research Assistant Agent demonstrates how to build a production-ready multi-
 
 ```mermaid
 flowchart TD
-    U["👤 User Input\n(Research Topic)"] --> A["Research Assistant\n(Sequential Orchestrator)"]
+    U["👤 User Input
+    (Research Topic)"] --> A["Research Assistant
+    (Sequential Orchestrator)"]
     A --> B["Researcher Agent"]
     B --> C["Analysis Agent"]
     C --> D["Recommender Agent"]
     D --> E["Writer Agent"]
-    E --> F["📄 Final Report\n(Agent Output)"]
+    E --> F["📄 Final Report
+    (Agent Output)"]
 ```
 
 Each agent processes the output of the previous stage sequentially, creating a pipeline that transforms raw research into actionable insights and a professional report.
