@@ -60,7 +60,7 @@ Each agent processes the output of the previous stage sequentially, creating a p
 
 - **[ADK-TS](https://adk.iqai.com/)** – The TypeScript-Native AI Agent Framework
 - **[ADK-TS CLI](https://adk.iqai.com/docs/cli)** – CLI for testing and running agents
-- **TypeScript** – Type-safe agent development
+- **[TypeScript](https://www.typescriptlang.org/)** – Type-safe agent development
 - **[Google AI (Gemini)](https://aistudio.google.com/)** – LLM provider
 - **[Tavily](https://tavily.com/)** – Real-time web search for data gathering
 
