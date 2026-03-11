@@ -1,7 +1,46 @@
 // src/agents/researcher-agent/agent.ts
 import { LlmAgent, WebSearchTool } from "@iqai/adk";
+import type { BaseTool, ToolContext } from "@iqai/adk";
 import { env } from "../../env";
-import { STATE_KEYS } from "../../constants";
+import { STATE_KEYS, MAX_SEARCHES } from "../../constants";
+import { beforeAgentCallback, afterAgentCallback } from "../../callbacks";
+
+// Enforces search limit AND prevents parallel tool calls
+const enforceSearchLimit = async (
+  _tool: BaseTool,
+  _args: Record<string, any>,
+  toolContext: ToolContext,
+) => {
+  const count = (toolContext.state["temp:search_count"] as number) || 0;
+
+  if (count >= MAX_SEARCHES) {
+    return {
+      result: `Search limit reached (${MAX_SEARCHES}/${MAX_SEARCHES}). Compile your research data now.`,
+    };
+  }
+
+  // Block parallel tool calls — one search per LLM response
+  if (toolContext.state["temp:search_in_progress"]) {
+    return {
+      result: `Only ONE search per turn. ${count}/${MAX_SEARCHES} done. Search again in your NEXT response.`,
+    };
+  }
+
+  toolContext.state["temp:search_count"] = count + 1;
+  toolContext.state["temp:search_in_progress"] = true;
+  return undefined;
+};
+
+// Clears the in-progress flag so the next turn can search
+const clearSearchFlag = async (
+  _tool: BaseTool,
+  _args: Record<string, any>,
+  toolContext: ToolContext,
+  _toolResponse: Record<string, any>,
+) => {
+  toolContext.state["temp:search_in_progress"] = false;
+  return undefined;
+};
 
 export const getResearcherAgent = () => {
   return new LlmAgent({
@@ -11,6 +50,10 @@ export const getResearcherAgent = () => {
     model: env.LLM_MODEL,
     tools: [new WebSearchTool()],
     outputKey: STATE_KEYS.SEARCH_RESULTS,
+    beforeAgentCallback,
+    afterAgentCallback,
+    beforeToolCallback: enforceSearchLimit, // Added beforeToolCallback
+    afterToolCallback: clearSearchFlag, // Added afterToolCallback~~
     disallowTransferToParent: true,
     disallowTransferToPeers: true,
     instruction: `You are a RESEARCH SPECIALIST. Your ONLY job is to gather comprehensive data through web searches.

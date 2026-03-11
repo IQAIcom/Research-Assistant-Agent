@@ -3,6 +3,7 @@
 import { LlmAgent } from "@iqai/adk";
 import { env } from "../../env";
 import { STATE_KEYS } from "../../constants";
+import { beforeAgentCallback, afterAgentCallback } from "../../callbacks";
 
 export const getAnalysisAgent = () => {
   return new LlmAgent({
@@ -11,6 +12,8 @@ export const getAnalysisAgent = () => {
       "Analyzes raw research data to extract key insights, patterns, and structured findings",
     model: env.LLM_MODEL,
     outputKey: STATE_KEYS.ANALYSIS_REPORT,
+    beforeAgentCallback,
+    afterAgentCallback,
     disallowTransferToParent: true,
     disallowTransferToPeers: true,
     instruction: `You are an ANALYSIS SPECIALIST. Analyze research data and extract meaningful insights.

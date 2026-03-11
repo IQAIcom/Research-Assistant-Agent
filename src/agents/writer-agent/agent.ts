@@ -3,6 +3,7 @@
 import { LlmAgent } from "@iqai/adk";
 import { env } from "../../env";
 import { STATE_KEYS } from "../../constants";
+import { beforeAgentCallback, afterAgentCallback } from "../../callbacks";
 
 export const getWriterAgent = () => {
   return new LlmAgent({
@@ -11,6 +12,8 @@ export const getWriterAgent = () => {
       "Synthesizes research, analysis, and recommendations into a polished final report",
     model: env.LLM_MODEL,
     outputKey: STATE_KEYS.FINAL_REPORT,
+    beforeAgentCallback,
+    afterAgentCallback,
     disallowTransferToParent: true,
     disallowTransferToPeers: true,
     instruction: `You are a PROFESSIONAL REPORT WRITER. Synthesize all prior outputs into one comprehensive final report.
