@@ -7,6 +7,10 @@ This is the code demo for the 2-part article series on the IQ blog:
 - [Part 1: Build a Research Assistant Agent in TypeScript with ADK-TS](http://blog.iqai.com/build-research-assistant-agent-typescript-adk-ts-part-1)
 - [Part 2: Build a Research Assistant Agent in TypeScript with ADK-TS](http://blog.iqai.com/build-research-assistant-agent-typescript-adk-ts-part-2)
 
+> **Branch guide:**
+> - **`part-1`** — Code for the Part 1 article (basic multi-agent setup)
+> - **`part-2`** — Code for the Part 2 article (callbacks, session state, and memory)
+
 Please give this repo a ⭐ if it was helpful to you!
 
 ## Table of Contents
